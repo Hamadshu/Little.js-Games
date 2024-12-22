@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruffle SWF Demo</title>
+    <script src="ruffle.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .swf-container {
+            margin: 20px auto;
+            width: 800px;
+            height: 600px;
+            border: 2px solid #ccc;
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ruffle SWF Demo</h1>
+    <p>Choose an SWF file to play:</p>
+    <input type="file" id="swf-upload" accept=".swf">
+    <div class="swf-container" id="swf-container"></div>
+
+    <script>
+        const uploadInput = document.getElementById('swf-upload');
+        const container = document.getElementById('swf-container');
+
+        const rufflePlayer = window.RufflePlayer.newest();
+        const player = rufflePlayer.createPlayer();
+        container.appendChild(player);
+
+        uploadInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const fileURL = URL.createObjectURL(file);
+                player.load(fileURL);
+            }
+        });
+    </script>
+</body>
+</html>
